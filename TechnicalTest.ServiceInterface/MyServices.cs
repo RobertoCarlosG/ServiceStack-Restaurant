@@ -61,19 +61,19 @@ namespace TechnicalTest.ServiceInterface
                             if (recordId != null)
                             {
                                 trans.Rollback();
-                                return new RestaurantResponse { Message = "No se pueden ingresar dos restaurantes iguales" };
+                                return new RestaurantResponse { Message = "No se pueden ingresar dos restaurantes iguales", Code= 502 };
                             }
 
                             db.Insert(request);
                             trans.Commit();
 
-                            return new RestaurantResponse { Message = $"Registro del restaurante {request.Name} completada" };
+                            return new RestaurantResponse { Message = $"Registro del restaurante {request.Name} completada", Code=200 };
                         }
                         
                         catch (Exception ex)
                         {
                             trans.Rollback();
-                            return new RestaurantResponse { Message = $"Transaction rolled back due to an exception: {ex.Message} " };
+                            return new RestaurantResponse { Message = $"Transaction rolled back due to an exception: {ex.Message} ", Code = 503 };
                         }
                     }
                 }
@@ -81,7 +81,7 @@ namespace TechnicalTest.ServiceInterface
             catch (Exception ex)
             {
 
-                return new RestaurantResponse { Message = $"Ocurrio un error: {ex.Message} " };
+                return new RestaurantResponse { Message = $"Ocurrio un error: {ex.Message} ", Code = 500 };
             }
             
         }
@@ -110,18 +110,18 @@ namespace TechnicalTest.ServiceInterface
                             db.Update(recordToUpdate);
 
                             transaction.Commit();
-                            return new RestaurantResponse{ Message = $"Actualizacion de  {request.Name} completada" };
+                            return new RestaurantResponse{ Message = $"Actualizacion de  {request.Name} completada", Code = 200 };
                         }
                     }
                     catch (Exception ex)
                     {
                         transaction.Rollback();
-                        return new RestaurantResponse { Message = $"Transaction rolled back due to an exception: {ex.Message} "  };
+                        return new RestaurantResponse { Message = $"Transaction rolled back due to an exception: {ex.Message} ", Code = 502 };
                     }
 
                 }
             }
-            return new RestaurantResponse { Message = $"Actualizacion del restaurante {request.Name} completada" };
+            return new RestaurantResponse { Message = $"Actualizacion del restaurante {request.Name} completada", Code = 200 };
         }
         public object DELETE(Restaurante request)
         {
@@ -130,11 +130,11 @@ namespace TechnicalTest.ServiceInterface
                 try
                 {
                     var allRecords = db.Delete<Restaurante>(new { request.Name, request.Address,request.Telephone, request.Type });
-                    return new DeleteRestaurant() { Confirmed = allRecords.ToString() };
+                    return new RestaurantResponse() { Message = "Eliminacion completada",  Code = 200 };
                 }
                 catch (Exception ex)
                 {
-                    return ex.Message;
+                    return new RestaurantResponse { Message = $"No se pudo eliminar el restaurante: {ex.Message} ", Code = 502 };
                 }
 
             }

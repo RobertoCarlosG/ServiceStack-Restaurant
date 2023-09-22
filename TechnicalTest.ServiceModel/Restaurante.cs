@@ -34,6 +34,7 @@ namespace TechnicalTest.ServiceModel
     public class RestaurantResponse
     {
         public string Message { get; set; }
+        public int Code { get; set; }
     }
 
     public class CreateRestaurant : ICreateDb<Restaurante>, IReturn<Restaurante>
