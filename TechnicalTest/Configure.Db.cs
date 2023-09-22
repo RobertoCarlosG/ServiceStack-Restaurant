@@ -15,7 +15,7 @@ public class ConfigureDb : IHostingStartup
         .ConfigureServices((context, services) => {
             services.AddSingleton<IDbConnectionFactory>(new OrmLiteConnectionFactory(
                 context.Configuration.GetConnectionString("DefaultConnection")
-                ?? "Server=localhost;Database=test;User Id=test;Password=test;MultipleActiveResultSets=True;",
+                ?? "Server=DESKTOP-HAQL8HN\\SQLEXPRESS;Database=Prueba;User Id=testing;Password=QWERTY1234;Encrypt=False;TrustServerCertificate=True;MultipleActiveResultSets=True;",
                 SqlServer2012Dialect.Provider));
         })
         .ConfigureAppHost(appHost => {

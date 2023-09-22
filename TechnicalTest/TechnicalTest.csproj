@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <PackageReference Include="ServiceStack" Version="6.*" />
+    <PackageReference Include="ServiceStack.Admin" Version="6.0.2" />
     <PackageReference Include="ServiceStack.Api.OpenApi" Version="6.*" />
     <PackageReference Include="ServiceStack.OrmLite.SqlServer" Version="6.*" />
   </ItemGroup>
