@@ -34,7 +34,7 @@ namespace TechnicalTest.ServiceInterface
             }
         }
 
-        public object CREATE(Restaurante request)
+        public object POST(Restaurante request)
         {
             try
             {
