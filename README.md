@@ -1,4 +1,3 @@
-# react-spa
 
 .NET 6.0 React Webpack App Template
 
